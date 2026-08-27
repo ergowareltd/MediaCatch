@@ -1,12 +1,14 @@
 # MediaCatch
 
-MediaCatch is a local Streamlit-based media downloader powered by **yt-dlp**. It combines a normal downloader for supported platforms with an optional **authenticated browser capture** mode for dynamic websites where media is available only after signing in.
+MediaCatch is a local Streamlit-based media downloader powered by **yt-dlp**. It combines standard downloads for supported platforms with an optional **authenticated browser capture** mode for dynamic websites and **enhanced YouTube compatibility** for recent JavaScript/EJS challenge changes.
 
 > Use MediaCatch only for media you own or are authorized to download. The application does not remove or bypass DRM.
 
-## Features
+## Key capabilities
 
 - YouTube, TikTok, Vimeo and other sites supported by yt-dlp
+- **Enhanced YouTube compatibility with automatic JavaScript runtime detection and EJS challenge-solver support**
+- Automatic use of yt-dlp's official `ejs:github` remote component for YouTube when required
 - Direct MP4, M3U8/HLS and MPD/DASH URLs
 - MP4 video, best available format and MP3 audio extraction
 - Quality selection
@@ -16,8 +18,32 @@ MediaCatch is a local Streamlit-based media downloader powered by **yt-dlp**. It
 - Automatic capture of authorized direct media requests from dynamic sites
 - Persistent local login session as an opt-in feature
 - FFmpeg detection
-- YouTube JavaScript runtime detection
-- yt-dlp EJS challenge solver support via `ejs:github`
+- Deno/Node JavaScript runtime detection
+
+## Enhanced YouTube compatibility
+
+YouTube extraction has changed significantly and may now require a JavaScript runtime plus yt-dlp's EJS challenge-solver scripts. Without them, a valid video can sometimes fail with misleading messages such as:
+
+```text
+This video is not available
+```
+
+MediaCatch handles this automatically where possible:
+
+1. Detects **Deno** first, then **Node.js** as a fallback.
+2. Passes the detected runtime to yt-dlp.
+3. Automatically enables yt-dlp's official EJS challenge component for YouTube:
+
+```text
+--remote-components ejs:github
+```
+
+4. Uses the `yt-dlp[default]` Python dependency group, which includes the companion EJS package required by current yt-dlp releases.
+5. Shows a specific diagnostic message when a YouTube failure appears related to JavaScript/EJS challenge solving instead of treating every failure as a genuinely unavailable video.
+
+Deno is the recommended runtime for current yt-dlp YouTube support. On Windows, run `INSTALL_DENO.bat` once and restart MediaCatch.
+
+See [YouTube Compatibility](docs/YOUTUBE_COMPATIBILITY.md) for technical details and troubleshooting.
 
 ## Two operating modes
 
@@ -26,6 +52,8 @@ MediaCatch is a local Streamlit-based media downloader powered by **yt-dlp**. It
 Use this for normal yt-dlp-compatible URLs such as YouTube, TikTok, Vimeo, supported websites, and direct media URLs.
 
 Paste a video URL, click **Analyze**, choose the format/quality, then click **Download**.
+
+For YouTube URLs, MediaCatch automatically adds its JavaScript runtime and EJS compatibility layer described above.
 
 ### 2. Authenticated browser mode
 
@@ -41,15 +69,17 @@ The browser profile can optionally be stored locally in `.auth_browser_profile/`
 - Python 3.11+
 - Google Chrome or Microsoft Edge for authenticated browser mode
 - FFmpeg for MP3 conversion and many high-quality audio/video merges
-- Deno (recommended) or a supported Node.js runtime for current YouTube JavaScript challenges
+- **Deno 2.3+ recommended for current YouTube compatibility**
+- A supported Node.js runtime can be used as an alternative
 
 ## Quick start on Windows
 
 1. Download or clone this repository.
 2. Double-click `START_APP.bat`.
 3. The script creates `.venv`, installs Python dependencies and launches Streamlit.
-4. If you need MP3 or merged high-quality formats, run `INSTALL_FFMPEG.bat` once.
-5. For best current YouTube compatibility, run `INSTALL_DENO.bat` once and restart MediaCatch.
+4. Run `INSTALL_DENO.bat` once for the best current YouTube compatibility.
+5. If you need MP3 or merged high-quality formats, run `INSTALL_FFMPEG.bat` once.
+6. Restart MediaCatch after installing Deno or FFmpeg.
 
 Manual startup:
 
@@ -59,15 +89,13 @@ py -m venv .venv
 .\.venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-## YouTube and EJS challenges
+## Why the YouTube compatibility layer matters
 
-Recent YouTube extraction can require both a JavaScript runtime and yt-dlp's EJS challenge-solver scripts. MediaCatch detects Deno/Node and enables:
+MediaCatch is not only a graphical wrapper around a basic yt-dlp command. It includes handling for a recent class of YouTube extraction failures caused by JavaScript challenge changes.
 
-```text
---remote-components ejs:github
-```
+A browser may play a video normally while a downloader reports it as unavailable. MediaCatch checks the local JavaScript runtime and enables the current yt-dlp EJS challenge-solver distribution automatically for YouTube URLs. This reduces manual configuration and makes the cause of these failures easier to diagnose.
 
-for YouTube URLs. Deno is the recommended runtime in yt-dlp's current documentation.
+This compatibility layer depends on yt-dlp and its official EJS components and therefore should be kept updated as YouTube changes.
 
 ## FFmpeg
 
@@ -95,6 +123,7 @@ See [SECURITY.md](SECURITY.md) for additional notes.
 ## Limitations
 
 - MediaCatch does **not** remove or bypass DRM.
+- YouTube compatibility depends on current yt-dlp/EJS support and can change when YouTube changes its player or challenge system.
 - Some sites actively block automated clients or change frequently.
 - Signed URLs can expire and may need to be captured again.
 - Browser-cookie extraction from Chrome on Windows can fail because of DPAPI/Application-Bound Encryption; authenticated browser mode avoids relying on the normal Chrome profile for those cases.
@@ -113,6 +142,12 @@ or update manually inside the virtual environment:
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -U "yt-dlp[default]"
 ```
+
+Keeping `yt-dlp[default]` updated is especially important for YouTube because the EJS companion package and supported challenge-solving behavior can change over time.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for version history and compatibility changes.
 
 ## Legal notice
 
