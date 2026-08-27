@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.env
+.env.*
+
+# Streamlit / IDE
+.streamlit/secrets.toml
+.vscode/
+.idea/
+
+# MediaCatch runtime data
+downloads/
+tools/
+.auth_browser_profile/
+yt-dlp.exe
+*.part
+*.tmp
+cookies*.txt
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
