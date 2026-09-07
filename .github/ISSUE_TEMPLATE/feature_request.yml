@@ -1,0 +1,88 @@
+name: Feature request
+description: Suggest a new feature or improvement for MediaCatch
+title: "[Feature] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement to MediaCatch.
+
+        Please describe the problem you want to solve and how you expect the feature to work.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What problem would this feature solve?
+      placeholder: |
+        Explain the current limitation or use case.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe how you think the feature should work.
+      placeholder: |
+        Explain the expected behavior, controls, workflow or output.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area of MediaCatch
+      description: Which part of the application would this feature affect?
+      options:
+        - Standard yt-dlp downloads
+        - Authenticated browser capture
+        - YouTube compatibility
+        - Audio / MP3 extraction
+        - Playlists
+        - Subtitles
+        - Browser session handling
+        - User interface
+        - Installation and setup
+        - FFmpeg integration
+        - Deno / JavaScript runtime
+        - Documentation
+        - Testing / CI
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Example workflow
+      description: Describe how a user would use the proposed feature.
+      placeholder: |
+        1. Open MediaCatch
+        2. Select ...
+        3. Enter ...
+        4. MediaCatch should ...
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Have you tried another solution or workaround?
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Add screenshots, examples, links or other useful information.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues for a similar feature request.
+          required: true
+        - label: This feature does not require DRM circumvention or unauthorized access.
+          required: true
+        - label: I understand that authenticated features must rely on access legitimately established by the user.
+          required: true
