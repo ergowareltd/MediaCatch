@@ -1,0 +1,128 @@
+name: Bug report
+description: Report a reproducible problem with MediaCatch
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem with MediaCatch.
+
+        Please provide enough information to reproduce the issue.
+        Do not include passwords, authentication tokens, cookies, session data or other private credentials.
+
+  - type: input
+    id: mediacatch-version
+    attributes:
+      label: MediaCatch version
+      description: Which MediaCatch version are you using?
+      placeholder: "v1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      description: Include the operating system and version.
+      placeholder: "Windows 11 24H2"
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python version
+      placeholder: "Python 3.12.4"
+    validations:
+      required: true
+
+  - type: input
+    id: ytdlp-version
+    attributes:
+      label: yt-dlp version
+      placeholder: "2026.08.19"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: MediaCatch mode
+      description: Where does the problem occur?
+      options:
+        - Standard yt-dlp download
+        - Authenticated browser capture
+        - YouTube download
+        - MP3 extraction
+        - Playlist download
+        - Subtitle download
+        - Application startup
+        - Installation or dependencies
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      description: Select the browser if the issue involves authenticated browser mode.
+      options:
+        - Not applicable
+        - Google Chrome
+        - Microsoft Edge
+        - Other
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Describe the problem
+      description: Clearly explain what happened.
+      placeholder: |
+        Describe the problem, what you expected to happen,
+        and what happened instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Provide the minimum sequence of steps needed to reproduce the problem.
+      placeholder: |
+        1. Start MediaCatch
+        2. Select ...
+        3. Enter ...
+        4. Click ...
+        5. Error occurs
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs or error messages
+      description: |
+        Paste only the relevant error output.
+        Remove passwords, cookies, tokens, authorization headers and other private data.
+      render: shell
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional information
+      description: Add screenshots, notes or other useful context if needed.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I checked that I am using the latest available MediaCatch version.
+          required: true
+        - label: I searched existing issues for the same problem.
+          required: true
+        - label: I removed passwords, cookies, tokens and other private authentication data from this report.
+          required: true
+        - label: The content or website involved is accessible to me legitimately and I have the appropriate permissions.
+          required: true
