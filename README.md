@@ -1,5 +1,7 @@
 # MediaCatch
 
+[![CI](https://github.com/ergowareltd/MediaCatch/actions/workflows/ci.yml/badge.svg)](https://github.com/ergowareltd/MediaCatch/actions/workflows/ci.yml)
+
 MediaCatch is a local Streamlit-based media downloader powered by **yt-dlp**. It combines standard downloads for supported platforms with an optional **authenticated browser capture** mode for dynamic websites and **enhanced YouTube compatibility** for recent JavaScript/EJS challenge changes.
 
 > Use MediaCatch only for media you own or are authorized to download. The application does not remove or bypass DRM.
