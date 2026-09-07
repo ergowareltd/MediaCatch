@@ -22,6 +22,8 @@ Select the relevant option:
 
 ## Affected area
 
+Select all relevant areas:
+
 - [ ] Standard yt-dlp downloads
 - [ ] Authenticated browser capture
 - [ ] YouTube compatibility
@@ -44,3 +46,31 @@ Examples:
 ```text
 python -m pytest -q
 python -m py_compile app.py
+```
+
+If relevant, also mention:
+
+- Python version
+- Operating system
+- Browser used
+- yt-dlp version
+- FFmpeg availability
+- Deno / Node.js availability
+
+## Security and access considerations
+
+Confirm the following where applicable:
+
+- [ ] This change does not add DRM circumvention.
+- [ ] This change does not bypass access controls without authorization.
+- [ ] This change does not expose passwords, cookies, tokens or private authentication data.
+- [ ] Authenticated browser functionality continues to rely on sessions legitimately established by the user.
+
+## Documentation
+
+- [ ] Documentation was updated if user-facing behavior changed.
+- [ ] `CHANGELOG.md` was updated if appropriate.
+
+## Additional notes
+
+Add any screenshots, logs, implementation notes or known limitations here.
