@@ -41,6 +41,6 @@ jobs:
         run: |
           python -c "import yt_dlp; print('yt-dlp OK')"
 
-       - name: Run tests
+      - name: Run tests
         run: |
           python -m pytest -q
