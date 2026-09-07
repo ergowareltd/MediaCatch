@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
 
       - name: Check Python syntax
         run: |
@@ -40,3 +40,7 @@ jobs:
       - name: Check yt-dlp import
         run: |
           python -c "import yt_dlp; print('yt-dlp OK')"
+
+      - name: Run tests
+        run: |
+          pytest -q
