@@ -1,0 +1,10 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/ergowareltd/MediaCatch/security/policy
+    about: Please report security vulnerabilities through the repository security policy instead of opening a public issue.
+
+  - name: MediaCatch documentation
+    url: https://github.com/ergowareltd/MediaCatch#readme
+    about: Check the README and project documentation before opening a new issue.
